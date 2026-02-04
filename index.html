@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For Laura 💖</title>
+
+<style>
+    body {
+        margin: 0;
+        height: 100vh;
+        overflow: hidden;
+        background: linear-gradient(to right, #ffdde1, #ee9ca7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-family: 'Arial', sans-serif;
+    }
+
+    .card {
+        background: white;
+        padding: 50px 60px;
+        border-radius: 20px;
+        text-align: center;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        max-width: 420px;
+        z-index: 2;
+    }
+
+    h1 {
+        color: #ff4d6d;
+        font-size: 26px;
+        margin-bottom: 25px;
+    }
+
+    .buttons {
+        margin-top: 20px;
+        position: relative;
+    }
+
+    button {
+        padding: 12px 28px;
+        font-size: 16px;
+        border: none;
+        border-radius: 25px;
+        cursor: pointer;
+        margin: 10px;
+        transition: 0.3s;
+    }
+
+    .yes {
+        background: #ff4d6d;
+        color: white;
+    }
+
+    .yes:hover {
+        background: #ff1f4a;
+        transform: scale(1.05);
+    }
+
+    .no {
+        background: #ddd;
+        color: #333;
+        position: absolute;
+    }
+
+    /* Hearts animation */
+    .heart {
+        position: absolute;
+        color: #ff4d6d;
+        font-size: 20px;
+        animation: floatUp 6s linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes floatUp {
+        0% {
+            transform: translateY(0) scale(1);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-100vh) scale(1.5);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+
+<body>
+
+<div class="card" id="card">
+    <h1>Laura 💕</h1>
+    <h1>Will you be my Valentine? 💖</h1>
+
+    <div class="buttons">
+        <button class="yes" onclick="yesClick()">Yes 💘</button>
+        <button class="no" id="noBtn" onmouseover="moveNo()">No 🙈</button>
+    </div>
+</div>
+
+<!-- Background music -->
+<audio id="bgMusic" loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_9c7d0c6b4e.mp3?filename=romantic-ambient-piano-112191.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+function yesClick() {
+    document.getElementById("card").innerHTML = `
+        <h1>Yayyy 💖</h1>
+        <h1>I'm so happy you said yes 🥰</h1>
+        <div style="margin-top:20px;font-size:18px;color:#ff4d6d;">— Tayo</div>
+    `;
+}
+
+// Make "No" button escape
+function moveNo() {
+    const btn = document.getElementById("noBtn");
+    const x = Math.random() * 200 - 100;
+    const y = Math.random() * 100 - 50;
+    btn.style.transform = `translate(${x}px, ${y}px)`;
+}
+
+// Play music on first click (browser-friendly)
+document.body.addEventListener("click", () => {
+    document.getElementById("bgMusic").play();
+}, { once: true });
+
+// Hearts generator
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (16 + Math.random() * 20) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+        heart.remove();
+    }, 6000);
+}
+
+setInterval(createHeart, 400);
+</script>
+
+</body>
+</html>
